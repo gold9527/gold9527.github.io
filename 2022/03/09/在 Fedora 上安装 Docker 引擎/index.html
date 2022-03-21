@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="gold9527">
+    
+    <title>
+        
+            在 Fedora 上安装 Docker 引擎 |
+        
+        gold9527
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                gold9527
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">在 Fedora 上安装 Docker 引擎</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">gold9527</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-03-09 15:29:50</span>
+        <span class="mobile">2022-03-09 15:29</span>
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="在-Fedora-上安装-Docker-引擎"><a href="#在-Fedora-上安装-Docker-引擎" class="headerlink" title="在 Fedora 上安装 Docker 引擎"></a>在 Fedora 上安装 Docker 引擎</h1><p><em>预计阅读时间：11分钟</em></p>
+<p>要在 Fedora 上开始使用 Docker Engine，请确保您 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#prerequisites" >满足先决条件<i class="fas fa-external-link-alt"></i></a> ，那么 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#installation-methods" >安装 Docker<i class="fas fa-external-link-alt"></i></a> 。</p>
+<h2 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#prerequisites" ><i class="fas fa-external-link-alt"></i></a></h2><h3 id="操作系统要求"><a href="#操作系统要求" class="headerlink" title="操作系统要求"></a>操作系统要求<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#os-requirements" ><i class="fas fa-external-link-alt"></i></a></h3><p>要安装 Docker Engine，您需要以下 Fedora 版本之一的 64 位版本：</p>
+<ul>
+<li>软呢帽 34</li>
+<li>软呢帽 35</li>
+</ul>
+<h3 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#uninstall-old-versions" ><i class="fas fa-external-link-alt"></i></a></h3><p>旧版本的 Docker 被称为 <code>docker</code>或者 <code>docker-engine</code>. 如果这些是 安装，卸载它们以及相关的依赖项。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf remove docker \</span><br><span class="line">                 docker-client \</span><br><span class="line">                 docker-client-latest \</span><br><span class="line">                 docker-common \</span><br><span class="line">                 docker-latest \</span><br><span class="line">                 docker-latest-logrotate \</span><br><span class="line">                 docker-logrotate \</span><br><span class="line">                 docker-selinux \</span><br><span class="line">                 docker-engine-selinux \</span><br><span class="line">                 docker-engine</span><br></pre></td></tr></table></figure>
+
+<p>没关系，如果 <code>dnf</code>报告说这些软件包都没有安装。</p>
+<p>的内容 <code>/var/lib/docker/</code>，包括图像、容器、卷和 网络，被保留。 Docker Engine 包现在被称为 <code>docker-ce</code>.</p>
+<h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#installation-methods" ><i class="fas fa-external-link-alt"></i></a></h2><p>您可以根据需要以不同方式安装 Docker Engine：</p>
+<ul>
+<li><p>大多数用户 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#install-using-the-repository" >设置 Docker 的存储库<i class="fas fa-external-link-alt"></i></a> 并安装 以便于安装和升级任务。 这是 推荐的方法。</p>
+</li>
+<li><p>一些用户下载了 RPM 包并 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#install-from-a-package" >手动安装<i class="fas fa-external-link-alt"></i></a> 并管理 完全手动升级。 这在安装等情况下很有用 无法访问互联网的气隙系统上的 Docker。</p>
+</li>
+<li><p>在测试和开发环境中，部分用户选择使用自动化 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#install-using-the-convenience-script" >便捷脚本<i class="fas fa-external-link-alt"></i></a> 安装 Docker 的 。</p>
+</li>
+</ul>
+<h3 id="使用存储库安装"><a href="#使用存储库安装" class="headerlink" title="使用存储库安装"></a>使用存储库安装<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#install-using-the-repository" ><i class="fas fa-external-link-alt"></i></a></h3><p>在新主机上首次安装 Docker Engine 之前，您需要 设置 Docker 存储库。 之后，您可以安装和更新 Docker 从存储库。</p>
+<h4 id="设置存储库"><a href="#设置存储库" class="headerlink" title="设置存储库"></a>设置存储库</h4><p>安装 <code>dnf-plugins-core</code>包（提供命令来管理 您的 DNF 存储库）并设置 <strong>稳定</strong> 存储库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf -y install dnf-plugins-core</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf config-manager \</span><br><span class="line">   --add-repo \</span><br><span class="line">   https://download.docker.com/linux/fedora/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>可选</strong> ：启用 <strong>夜间</strong> 或 <strong>测试</strong> 存储库。</p>
+<p>这些存储库包含在 <code>docker.repo</code>上面的文件但被禁用 默认情况下。 您可以在稳定存储库旁边启用它们。 下列 命令启用 <strong>夜间</strong> 存储库。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf config-manager --set-enabled docker-ce-nightly</span><br></pre></td></tr></table></figure>
+
+<p>要启用 <strong>测试</strong> 通道，请运行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf config-manager --set-enabled docker-ce-test</span><br></pre></td></tr></table></figure>
+
+<p>您可以 禁用 <strong>每晚</strong> 或 <strong>测试</strong> 通过运行以下命令 存储库 <code>dnf config-manager</code>命令与 <code>--set-disabled</code>旗帜。 要重新启用它， 使用 <code>--set-enabled</code>旗帜。 以下命令禁用 <strong>每晚</strong> 存储库。</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf config-manager --set-disabled docker-ce-nightly</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/">了解 <strong>nightly</strong> 和 <strong>test</strong> 频道</a> 。</p>
+</blockquote>
+<h4 id="安装-Docker-引擎"><a href="#安装-Docker-引擎" class="headerlink" title="安装 Docker 引擎"></a>安装 Docker 引擎</h4><ol>
+<li>安装 <em>最新版本</em> 的 Docker Engine 和 containerd，或者进入下一步安装特定版本：</li>
+</ol>
+<ul>
+<li><pre><code> sudo dnf install docker-ce docker-ce-cli containerd.io
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">    如果提示接受 GPG 密钥，请验证指纹是否匹配 `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`，如果是，接受它。</span><br><span class="line">    </span><br><span class="line">    &gt; 有多个 Docker 存储库？</span><br><span class="line">    &gt; </span><br><span class="line">    &gt; 如果您启用了多个 Docker 存储库，请安装 或在不指定版本的情况下更新 `dnf install`或者 `dnf update`命令总是安装可能的最高版本， 这可能不适合您的稳定性需求。</span><br><span class="line">    </span><br><span class="line">    此命令会安装 Docker，但不会启动 Docker。 它还创建了一个 `docker`组，但是，默认情况下它不会将任何用户添加到组中。</span><br><span class="line">    </span><br><span class="line">-   要安装 _特定版本_ 的 Docker Engine，请列出可用版本 在 repo 中，然后选择并安装：</span><br><span class="line">    </span><br><span class="line">    一个。 列出并排序您的存储库中可用的版本。 这个例子排序 结果按版本号，从最高到最低，并被截断：</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ dnf list docker-ce  --showduplicates | sort -r
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">返回的列表取决于启用的存储库，并且是特定的 到您的 Fedora 版本（由 `.fc28`本例中的后缀）。</span><br><span class="line"></span><br><span class="line">湾 通过其完全限定的包名称安装特定版本，即 包名（ `docker-ce`) 加上版本字符串（第二列）直到 第一个连字符，由连字符 ( `-`）， 例如， `docker-ce-3:18.09.1`.</span><br><span class="line"></span><br><span class="line">-   ```</span><br><span class="line">     sudo dnf -y install docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io</span><br></pre></td></tr></table></figure>
+
+此命令会安装 Docker，但不会启动 Docker。 它还创建了一个 `docker`组，但是，默认情况下它不会将任何用户添加到组中。
+</code></pre>
+</li>
+<li><p>启动 Docker。</p>
+</li>
+<li><p>&#96;&#96;&#96;<br> sudo systemctl start docker</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">-   通过运行以下命令验证 Docker Engine 是否已正确安装 `hello-world` 图片。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">1.  ```</span><br><span class="line">     sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>此命令下载测试映像并在容器中运行它。 当。。。的时候 容器运行，它打印一条消息并退出。</p>
+</li>
+</ul>
+<p>这将安装并运行 Docker 引擎。 利用 <code>sudo</code>运行 Docker 命令。 继续 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/linux-postinstall/" >Linux postinstall<i class="fas fa-external-link-alt"></i></a> 以允许 非特权用户运行 Docker 命令和其他可选配置 脚步。</p>
+<h4 id="升级-Docker-引擎"><a href="#升级-Docker-引擎" class="headerlink" title="升级 Docker 引擎"></a>升级 Docker 引擎</h4><p>要升级 Docker Engine，请按照 <a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#install-using-the-repository" >安装说明进行操作<i class="fas fa-external-link-alt"></i></a> ， 选择要安装的新版本。</p>
+<h3 id="从包安装"><a href="#从包安装" class="headerlink" title="从包安装"></a>从包安装<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/fedora/#install-from-a-package" ><i class="fas fa-external-link-alt"></i></a></h3><p>如果您无法使用 Docker 的存储库安装 Docker，您可以下载 <code>.rpm</code>文件并手动安装。 你需要下载 每次要升级 Docker 引擎时都会创建一个新文件。</p>
+<ol>
+<li><p>前往 <a class="link"   target="_blank" rel="noopener" href="https://download.docker.com/linux/fedora/" >https://download.docker.com/linux/fedora/<i class="fas fa-external-link-alt"></i></a> 并选择您的 Fedora 版本。 然后浏览到 <code>x86_64/stable/Packages/</code> 并下载 <code>.rpm</code>要安装的 Docker 版本的文件。</p>
+<blockquote>
+<p><strong>笔记</strong></p>
+<p>要安装 <strong>每晚</strong> 或 <strong>测试</strong> （预发布）包， 换个词 <code>stable</code>在上面的网址中 <code>nightly</code>或者 <code>test</code>. <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/">了解 <strong>nightly</strong> 和 <strong>test</strong> 频道</a> 。</p>
+</blockquote>
+</li>
+<li><p>安装Docker Engine，把下面的路径改成你下载的路径 Docker 包。</p>
+</li>
+</ol>
+<ul>
+<li><pre><code> sudo dnf -y install /path/to/package.rpm
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">    Docker 已安装但未启动。 这 `docker`组已创建，但没有 用户被添加到组中。</span><br><span class="line">    </span><br><span class="line">-   启动 Docker。</span><br><span class="line">    </span><br><span class="line">-   ```</span><br><span class="line">     sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>通过运行以下命令验证 Docker Engine 是否已正确安装 <code>hello-world</code> 图片。</p>
+</li>
+</ul>
+<ol>
+<li>&#96;&#96;&#96;<br> sudo docker run hello-world<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">    此命令下载测试映像并在容器中运行它。 当。。。的时候 容器运行，它打印一条消息并退出。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">这将安装并运行 Docker 引擎。 利用 `sudo`运行 Docker 命令。 继续 [Linux 的安装后步骤](https://docs.docker.com/engine/install/linux-postinstall/) 以允许 非特权用户运行 Docker 命令和其他可选配置 脚步。</span><br><span class="line"></span><br><span class="line">#### 升级 Docker 引擎</span><br><span class="line"></span><br><span class="line">要升级 Docker Engine，请下载更新的包文件并重复 [安装过程](https://docs.docker.com/engine/install/fedora/#install-from-a-package) ，使用 `dnf -y upgrade` 代替 `dnf -y install`, 并指向新文件。</span><br><span class="line"></span><br><span class="line">### 使用便利脚本安装[](https://docs.docker.com/engine/install/fedora/#install-using-the-convenience-script)</span><br><span class="line"></span><br><span class="line">Docker 在 提供了一个方便的脚本 [get.docker.com 上](https://get.docker.com/) 快速且非交互式地将 Docker 安装到开发环境中。 不建议将便利脚本用于生产环境，但可以 用作示例来创建适合您的需求的配置脚本。 另请参阅 的 [使用存储库 安装](https://docs.docker.com/engine/install/fedora/#install-using-the-repository) 了解使用软件包存储库进行安装的安装步骤的步骤。 该脚本的源代码是开源的，可以在 [`docker-install`GitHub 上的存储库](https://github.com/docker/docker-install) 。</span><br><span class="line"></span><br><span class="line">在本地运行之前，请务必检查从 Internet 下载的脚本。 在安装之前，让自己熟悉潜在的风险和限制 方便脚本的：</span><br><span class="line"></span><br><span class="line">-   脚本需要 `root`或者 `sudo`运行的特权。</span><br><span class="line">-   该脚本尝试检测您的 Linux 发行版和版本以及 为您配置您的包管理系统，并且不允许您 自定义大多数安装参数。</span><br><span class="line">-   该脚本无需请求即可安装依赖项和建议 确认。 这可能会安装大量软件包，具体取决于 主机的当前配置。</span><br><span class="line">-   默认情况下，该脚本会安装 Docker 的最新稳定版本，containerd， 和运行。 使用此脚本配置机器时，这可能会导致 意外的 Docker 主要版本升级。 始终测试（主要）升级 部署到生产系统之前的测试环境。</span><br><span class="line">-   该脚本并非旨在升级现有的 Docker 安装。 什么时候 使用脚本更新现有安装，依赖项可能不 更新到预期版本，导致使用过时的版本。</span><br><span class="line"></span><br><span class="line">&gt; 提示：运行前预览脚本步骤</span><br><span class="line">&gt; </span><br><span class="line">&gt; 您可以使用以下命令运行脚本 `DRY_RUN=1`选择了解哪些步骤 脚本将在安装期间执行：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ curl -fsSL <a class="link"   target="_blank" rel="noopener" href="https://get.docker.com/" >https://get.docker.com<i class="fas fa-external-link-alt"></i></a> -o get-docker.sh<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> DRY_RUN&#x3D;1 sh .&#x2F;get-docker.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">此示例从 下载脚本 [get.docker.com](https://get.docker.com/) 并运行它以在 Linux 上安装最新的稳定版 Docker：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> curl -fsSL <a class="link"   target="_blank" rel="noopener" href="https://get.docker.com/" >https://get.docker.com<i class="fas fa-external-link-alt"></i></a> -o get-docker.sh</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p> sudo sh get-docker.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">安装了 Docker。 这 `docker`服务在基于 Debian 的自动启动 分布。 在 `RPM`基于发行版，例如 CentOS、Fedora、RHEL 或 SLES， 您需要使用适当的手动启动它 `systemctl`或者 `service`命令。 如消息所示，默认情况下，非 root 用户无法运行 Docker 命令。</span><br><span class="line"></span><br><span class="line">&gt; **以非特权用户身份使用 Docker，还是以无根模式安装？**</span><br><span class="line">&gt; </span><br><span class="line">&gt; 安装脚本需要 `root`或者 `sudo`安装和权限 使用 Docker。 如果要授予非 root 用户访问 Docker 的权限，请参阅 [Linux 的安装后步骤](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) 。 Docker 也可以不安装 `root`权限，或配置为运行 在无根模式下。 有关在无根模式下运行 Docker 的说明，请参阅 [以非 root 用户身份运行 Docker 守护进程（无根模式）](https://docs.docker.com/engine/security/rootless/) 。</span><br><span class="line"></span><br><span class="line">#### 安装预发行版</span><br><span class="line"></span><br><span class="line">Docker 还在 提供了一个方便的脚本 [test.docker.com 上](https://test.docker.com/) 在 Linux 上安装 Docker 的预发布版本。 这个脚本相当于 脚本在 `get.docker.com`，但配置您的包管理器以启用 来自我们软件包存储库的“测试”频道，其中包括稳定版和 Docker 的预发布（测试版、发布候选）。 使用此脚本 尽早访问新版本，并在测试环境中对其进行评估 在它们稳定发布之前。</span><br><span class="line"></span><br><span class="line">要从“测试”频道在 Linux 上安装最新版本的 Docker，请运行：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> curl -fsSL <a class="link"   target="_blank" rel="noopener" href="https://test.docker.com/" >https://test.docker.com<i class="fas fa-external-link-alt"></i></a> -o test-docker.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p> sudo sh test-docker.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 使用便利脚本后升级 Docker</span><br><span class="line"></span><br><span class="line">如果您使用便利脚本安装 Docker，则应升级 Docker 直接使用您的包管理器。 重新运行没有任何好处 方便脚本，如果它试图重新添加它可能会导致问题 已添加到主机的存储库。</span><br><span class="line"></span><br><span class="line">## 卸载 Docker 引擎[](https://docs.docker.com/engine/install/fedora/#uninstall-docker-engine)</span><br><span class="line"></span><br><span class="line">1.  卸载 Docker Engine、CLI 和 Containerd 包：</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">-   ```</span><br><span class="line">     sudo dnf remove docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>主机上的映像、容器、卷或自定义配置文件 不会自动删除。 删除所有图像、容器和 卷：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><pre><code> sudo rm -rf /var/lib/containerd
+</code></pre>
+</li>
+</ol>
+<p>您必须手动删除任何已编辑的配置文件。</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/03/09/Docker-%E5%8F%AF%E8%A7%86%E5%8C%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8Portainer/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker-可视化管理工具总结-推荐使用Portainer</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">gold9527</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="gold9527">
+    
+    <title>
+        
+            Docker-可视化管理工具总结-推荐使用Portainer |
+        
+        gold9527
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                gold9527
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Docker-可视化管理工具总结-推荐使用Portainer</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">gold9527</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-03-09 15:29:50</span>
+        <span class="mobile">2022-03-09 15:29</span>
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>#Docker-可视化管理工具总结-推荐使用Portainer</p>
+<p>播报文章</p>
+<p><a target="_blank" rel="noopener" href="https://author.baidu.com/home?from=bjh_article&app_id=1709493823433591"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/user/ae7c6431fa9530db3e0269b2903103bd.jpeg?x-bce-process=image/resize,m_lfit,w_200,h_200&autime=23040"
+                     
+                ></a></p>
+<p>[</p>
+<p>程序那点事</p>
+<p>](<a class="link"   target="_blank" rel="noopener" href="https://author.baidu.com/home?from=bjh_article&amp;app_id=1709493823433591" >https://author.baidu.com/home?from=bjh_article&amp;app_id=1709493823433591<i class="fas fa-external-link-alt"></i></a>)</p>
+<p>发布时间: 2022-03-07 09:23教育领域创作者</p>
+<p>关注</p>
+<p>对于初学docker的小白，一款好的可视化工具有助于快速掌握docker基本形态和概念，下面针对docker可视化工具做些总结</p>
+<h3 id="ui-for-docker"><a href="#ui-for-docker" class="headerlink" title="ui-for-docker#"></a>ui-for-docker#</h3><p>UI For Docker是一个使用Docker Remote API的web接口，目的是提供一个简洁纯净的客户端实现，为了连接和管理Docker； <strong>该工具目前已经无人维护，建议使用下面介绍的portainer</strong></p>
+<p>docker run -it -d –name docker-web –restart always -p 9000:9000 -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock docker.io&#x2F;uifd&#x2F;ui-for-docker</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics2.baidu.com/feed/48540923dd54564eb33d1f3e04b8618bd0584fc9.jpeg?token=e4e9e9bc6fea0fc01744eeaef5fde24a"
+                     
+                ></p>
+<h3 id="Portainer"><a href="#Portainer" class="headerlink" title="Portainer#"></a>Portainer#</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.portainer.io/installation/" >https://www.portainer.io/installation/<i class="fas fa-external-link-alt"></i></a><br>是一款Docker可视化管理工具，可让您轻松构建和管理 Docker、Docker Swarm、Kubernetes 和 Azure ACI 中的容器。</p>
+<p>Portainer 将管理容器的复杂性隐藏在易于使用的 UI 后面。通过消除使用 CLI、编写 YAML 或理解清单的需要，Portainer 使部署应用程序和解决问题变得如此简单，任何人都可以做到<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/f7629b94350478caa140e191da611f23.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_28,x_18,y_18"
+                     
+                ></p>
+<h3 id="Portainer-架构"><a href="#Portainer-架构" class="headerlink" title="Portainer-架构#"></a>Portainer-架构#</h3><p>Portainer 由两个元素组成：Portainer 服务器和 Portainer 代理。两者都在您现有的容器化基础设施上作为轻量级容器运行。Portainer 代理应该部署到集群中的每个节点，并配置为向 Portainer 服务器容器报告。<br>单个 Portainer 服务器将接受来自任意数量的 Portainer 代理的连接，从而提供从一个集中式界面管理多个集群的能力。为此，Portainer Server 容器需要数据持久性。Portainer 代理是无状态的，数据被传送回 Portainer 服务器容器。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics6.baidu.com/feed/4b90f603738da977cb5cd789043705108718e396.jpeg?token=7d3c53dd12e7be68eeacd3b891d7f9c8"
+                     
+                ></p>
+<h3 id="Portainer-安装"><a href="#Portainer-安装" class="headerlink" title="Portainer-安装#"></a>Portainer-安装#</h3><p>运行下面两条命令即可。这些命令会创建一个Portainer专用的卷，然后在8000和9000端口创建容器并运行。</p>
+<ol>
+<li><strong>基于本地容器的部署</strong></li>
+</ol>
+<p>如果使用Portainer管理本地Docker主机的话，需要绑定&#x2F;var&#x2F;run&#x2F;docker.sock**(这里是个知识点，涉及docker 之间通信的问题，以及docker 里运行docker )**</p>
+<p>$ docker volume create portainer_data$ docker run –name portainer  –restart always -d -p 8000:8000 -p 9000:9000 -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock -v portainer_data:&#x2F;data portainer&#x2F;portainer</p>
+<p>然后在浏览器打开对应地址，就会发现成功运行了。第一次运行的时候需要设置账号，然后选择要管理的Docker主机。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/0f48fe7b3953a8810e428b0a257b60a4.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_20,x_13,y_13"
+                     
+                ></p>
+<p><strong>注意：portainer&#x2F;portainer 是 Portainer v1.24.x 的镜像名，现在已弃用；从 2022 年 1 月开始，Portainer 2.0 的所有新版本都将在 portainer&#x2F;portainer-ce 中发布</strong></p>
+<p>docker run -d -p 8000:8000 -p 9443:9443 –name portainer –restart&#x3D;always -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock -v portainer_data:&#x2F;data portainer&#x2F;portainer-ce:2.11.1</p>
+<ol>
+<li><strong>连接到远程容器的部署</strong></li>
+</ol>
+<p>docker run -d -p 9000:9000 –name portainer –restart always -v portainer_data:&#x2F;data portainer&#x2F;portainer -H tcp:&#x2F;&#x2F;<REMOTE_HOST>:<REMOTE_PORT></p>
+<p>PS：-H 后面的remote是你想用portainert管理的docker</p>
+<h3 id="添加新的容器集群环境"><a href="#添加新的容器集群环境" class="headerlink" title="添加新的容器集群环境#"></a>添加新的容器集群环境#</h3><h3 id="1-本机连接方式"><a href="#1-本机连接方式" class="headerlink" title="1. 本机连接方式#"></a>1. 本机连接方式#</h3><p>只能在创建 Portainer Server 容器时添加本地环境。部署 Portainer 后，您无法添加本地环境</p>
+<p>第一次登陆会让选择管理的容器环境，这里可以选择本机<strong>，通过挂载&#x2F;var&#x2F;run&#x2F;docker.sock 和docker 守护进程通信（如图所示），</strong>关于这部分知识后面会总结分享出来。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics6.baidu.com/feed/cc11728b4710b9123b34ea336c9b010a904522f2.jpeg?token=0a81defcd96259a534d40ee8b5b5fd61"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/a1b106558db217359f0aafa3baf9a7c9.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_28,x_18,y_18"
+                     
+                ><br>之后就可以看到本机上运行的Docker容器了，点击它们还可以进行容器的管理。</p>
+<p>左边的条目可以管理卷、创建容器、查看主机信息等等。基本上该有的功能都有了<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/b5ed8051ced0d6746f021b1a3cfddc8e.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_27,x_17,y_17"
+                     
+                ></p>
+<h3 id="2-Remote连接方式"><a href="#2-Remote连接方式" class="headerlink" title="2. Remote连接方式#"></a>2. Remote连接方式#</h3><p>通过该方式，可以将远程机器添加到Portainer服务端，统一管理远程机器上的容器环境</p>
+<p>将 Docker Standalone 主机连接到 Portainer 时，可以使用两种方法。您可以通过 TCP 直接连接到 Docker API，也可以在 Docker Standalone 主机上安装 Portainer 代理并通过代理连接。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.portainer.io/v/ce-2.11/admin/environments/add/docker" >https://docs.portainer.io/v/ce-2.11/admin/environments/add/docker<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>1） 通过远程访问TCP：2375端口绑定环境</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/507e3f3de619d5c307765f27094f4433.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_34,x_22,y_22"
+                     
+                ><br>使用Remote要求被管理的主机开启docker守护线程监听端口<br>可以在&#x2F;etc&#x2F;docker&#x2F;daemon.json中添加如下配置</p>
+<p>{ “hosts”: [“tcp:&#x2F;&#x2F;0.0.0.0:2375”, “unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock”]}</p>
+<p><strong>2） 通过Portainer Agent方式管理docker环境</strong><br><a class="link"   target="_blank" rel="noopener" href="https://docs.portainer.io/v/ce-2.11/start/install/agent/docker/linux" >https://docs.portainer.io/v/ce-2.11/start/install/agent/docker/linux<i class="fas fa-external-link-alt"></i></a><br>使用Agent需要在要监控的主机上创建一个portainer agent容器</p>
+<p>docker run -d -p 9001:9001 –name portainer_agent –restart&#x3D;always -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock -v &#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes:&#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes portainer&#x2F;agent:2.11.1</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/681aa8116094a6ffa9d04ba3b04faa03.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_42,x_27,y_27"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/0b0ef9df254bfc165e701a10edb45c2e.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_18,x_12,y_12"
+                     
+                ></p>
+<p><strong>3） 通过Portainer Agent方式管理k8s集群环境</strong></p>
+<p><strong>在k8s集群上执行以下命令</strong></p>
+<p><code>curl -L https://downloads.portainer.io/portainer-agent-ce211-k8s-nodeport.yaml -o portainer-agent-k8s.yaml; kubectl apply -f portainer-agent-k8s.yaml</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics1.baidu.com/feed/7dd98d1001e9390163d1bd394386a9ee37d1965d.jpeg?token=6de66bebeb114de2b4e2ba8a578e0050"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics4.baidu.com/feed/f703738da9773912c7af560d497f7b11377ae246.jpeg?token=0e978dfd58407eb224ea54f0a0c6ded4"
+                     
+                ></p>
+<p>在远程k8s集群上部署agent后，在Portainer server 上通过nodeport 或者 targetport 进行服务配置，完成k8s集群的连接配置。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pic.rmb.bdstatic.com/bjh/down/3238cbe3f5f19f41288f5fbf1114754d.png@wm_2,t_55m+5a625Y+3L+eoi+W6j+mCo+eCueS6iw==,fc_ffffff,ff_U2ltSGVp,sz_15,x_10,y_10"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics5.baidu.com/feed/63d9f2d3572c11df910ab7dbd5419fd9f503c2db.jpeg?token=0e9e4085dec1bb9692da1051b79e5c86"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics7.baidu.com/feed/267f9e2f07082838573f631df2f354084c08f179.jpeg?token=2cbc91b659023675c46c326e984bac65"
+                     
+                ></p>
+<h3 id="LazyDocker"><a href="#LazyDocker" class="headerlink" title="LazyDocker#"></a>LazyDocker#</h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/jesseduffield/lazydocker" >https://github.com/jesseduffield/lazydocker<i class="fas fa-external-link-alt"></i></a></p>
+<p>LazyDocker是基于终端的一个可视化查询工具，支持键盘操作和鼠标点击。相比Portainer来说可能不那么专业，不过对于开发者来说可能反而更加好用了。因为一般开发者都是使用命令行来运行Docker，偶尔需要图形化查看的时候，就可以使用LazyDocker这个工具。</p>
+<p><strong>Lazydocker 的具体特性如下：</strong></p>
+<ul>
+<li><p>全视野查看 Docker 或 docker-compose 容器环境的状态</p>
+</li>
+<li><p>查看容器或服务的日志</p>
+</li>
+<li><p>查看容器指标的 ascii 图表，这样你会更像个开发者</p>
+</li>
+<li><p>自定义图表以测量不同指标</p>
+</li>
+<li><p>附加到容器&#x2F;服务</p>
+</li>
+<li><p>重启、删除与重新构建容器&#x2F;服务</p>
+</li>
+<li><p>查看给定镜像的祖先图层</p>
+</li>
+<li><p>修剪占用磁盘空间的容器、镜像或卷</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics7.baidu.com/feed/bd315c6034a85edfe2254be1f832f42adc547533.jpeg?token=2fde26913e610cd2b1b556a4e6ca0ca2"
+                     
+                ></p>
+<p>安装LazyDocker也非常简单，运行下面的命令即可。</p>
+<p>docker run –rm -it -v /var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock -v ~&#x2F;.config&#x2F;lazydocker:&#x2F;.config&#x2F;jesseduffield&#x2F;lazydocker \lazyteam&#x2F;lazydocker</p>
+<p>当然如果发现LazyDocker挺好用，准备经常使用的话，还可以把它做成缩写添加到shell配置文件中，这样就可以将它变成一个简单的命令。例如我用的是zsh，就将下面这样添加到.zshrc文件中。以后就可以直接用lzd来调用LazyDocker了。</p>
+<p><code>echo &quot;alias lzd=&#39;docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker&#39;&quot; &gt;&gt; ~/.zshrc</code></p>
+<p>然后就可以在终端中查看Docker容器、镜像和卷的信息了。LazyDocker支持键盘操作和鼠标点击，直接用鼠标点击就可以查看对应信息了</p>
+<h3 id="Docker-Desktop"><a href="#Docker-Desktop" class="headerlink" title="Docker Desktop#"></a>Docker Desktop#</h3><p>Docker Desktop 是 Docker 官方自带的客户端。<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/desktop/windows/%EF%BC%9B" >https://docs.docker.com/desktop/windows/；<i class="fas fa-external-link-alt"></i></a> 如果是windows用户，想在Windows系统上运行docker容器，可以使用；</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics4.baidu.com/feed/c2fdfc039245d68851141d0c16a48017d31b24f0.jpeg?token=796de97c1bd4bd042a8adc31d4c8ae83"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://pics4.baidu.com/feed/9213b07eca806538752ed25438bb5c4dac348225.jpeg?token=f110764d4cc9f345726b88d63e69838a"
+                     
+                ></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结#"></a>小结#</h3><ul>
+<li><p>Portainer 比较适合团队使用，因为他有访问控制。</p>
+</li>
+<li><p>Lazydocker 属于简单灵活的小工具，如果你不需要复杂的功能，他们比较合适，而且会让你更有程序员的感觉。</p>
+</li>
+<li><p>Docker Desktop 是 Windows&#x2F;Mac 安装 Docker 时就有的，管理功能比较简单，在需要简单的集成 Kubernetes 时可以用他。</p>
+</li>
+</ul>
+<p>来源：<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/FLY_DREAM/p/15972909.html" >https://www.cnblogs.com/FLY_DREAM/p/15972909.html<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/03/09/Ikeq&#39;s%20blog/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Ikeq&#39;s blog</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/09/%E5%9C%A8%20Fedora%20%E4%B8%8A%E5%AE%89%E8%A3%85%20Docker%20%E5%BC%95%E6%93%8E/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">在 Fedora 上安装 Docker 引擎</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">gold9527</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
